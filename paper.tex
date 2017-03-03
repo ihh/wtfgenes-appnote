@@ -1,5 +1,5 @@
 % Definitions
-\newcommand\wtfgenes{WTFGenes}
+\newcommand\wtfgenes{WTFgenes}
 
 % Abstract
 \structabs{
@@ -9,11 +9,12 @@ The most common technique uses the hypergeometric distribution;
 more recently, a model-based approach was proposed.
 These approaches must typically be run using downloaded software, or on a server.
 }{
-We present \wtfgenes, a reference implementation of hypergeometric and model-based
-Gene Ontology enrichment analysis, that can be published server-free as a static
+We present \wtfgenes, an implementation of both hypergeometric and model-based
+Gene Ontology enrichment analyses, that can be published as a static
 site with computation run in JavaScript on the user's web browser client.
-No server resources are required, though a faster C++ implementation yielding identical
-results is also provided.
+Apart from hosting, zero server resources are required: the site can (for example) be served
+directly from an S3 bucket.
+A faster C++ implementation yielding identical results is also provided.
 Our implementation of model-based Gene Ontology enrichment uses some optimizations
 which permit probability parameters to be integrated out directly.
 }{
