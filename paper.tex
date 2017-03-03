@@ -1,0 +1,69 @@
+% Definitions
+\newcommand\wtfgenes{WTFGenes}
+
+% Abstract
+\structabs{
+A common technique for interpreting experimentally-identified lists of genes
+is to look for enrichment of genes associated to particular Gene Ontology terms.
+The most common technique uses the hypergeometric distribution;
+more recently, a model-based approach was proposed.
+These approaches must typically be run using downloaded software, or on a server.
+}{
+We present \wtfgenes, a reference implementation of hypergeometric and model-based
+Gene Ontology enrichment analysis, that can be published server-free as a static
+site with computation run in JavaScript on the user's web browser client.
+No server resources are required, though a faster C++ implementation yielding identical
+results is also provided.
+Our implementation of model-based Gene Ontology enrichment uses some optimizations
+which permit probability parameters to be integrated out directly.
+}{
+\wtfgenes\ is available from \url{https://github.com/evoldoers/wtfgenes}.
+}{
+Ian Holmes {\tt ihholmes+wtfgenes@gmail.com}.
+}{
+None.
+}
+
+\section*{Introduction}
+
+Gene Set Enrichment Analysis (GSEA) \cite{pmid16199517}
+Numerous implementations e.g. GO::TermFinder \cite{pmid15297299}
+
+Model-based Gene Set Analysis (MGSA) \cite{pmid20172960}
+Bioconductor \cite{pmid21561920}
+
+builds on earlier generative model by \cite{pmid18676451}
+
+% description of MGSA from Bauer et al 2010
+
+Common feature of MGSA and GSEA implementations is that they are designed either for desktop use
+or for server-hosted applications
+
+\section*{Results}
+
+Optimization of MGSA: direct integration over parameters
+
+Static site implementation
+
+Speed comparison
+
+\section*{Discussion}
+
+GREAT \cite{pmid20436461}
+
+\section*{Funding}
+
+IHH was partially supported by NHGRI grant R01-HG004483.
+
+\bibliographystyle{natbib}
+%\bibliographystyle{bioinformatics}
+%\bibliographystyle{achemnat}
+%\bibliographystyle{plainnat}
+%\bibliographystyle{abbrv}
+%
+%\bibliographystyle{plain}
+%
+%\bibliography{Document}
+
+
+\bibliography{references}
