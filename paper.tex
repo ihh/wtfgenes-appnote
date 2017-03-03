@@ -37,16 +37,25 @@ builds on earlier generative model by \cite{pmid18676451}
 
 % description of MGSA from Bauer et al 2010
 
-Common feature of MGSA and GSEA implementations is that they are designed either for desktop use
-or for server-hosted applications
+Most MGSA and GSEA implementations are designed for desktop use.
+
+Several GSEA implementations are designed for web use, notably Enrichr \cite{pmid23586463,pmid25971742,pmid27141961}
+which has a rich dynamic web front-end.
+However these web-facing GSEA implementations generally require a server-hosted back end.
+Further, there are no web-based MGSA implementations.
+
 
 \section*{Results}
 
 Optimization of MGSA: direct integration over parameters
 
-Static site implementation
+We present JavaScript implementation of MGSA and GSEA, allowing easy comparison.
+Static site: can be hosted as static files, inexpensively and with considerable security benefits
 
-Speed comparison
+For reference we also provide C++ implementation that should yield numerically identical results
+(MCMC uses same random number generator)
+
+Speed comparison: C++ vs JavaScript
 
 \section*{Discussion}
 
