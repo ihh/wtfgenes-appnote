@@ -78,7 +78,6 @@ which has a rich dynamic web front-end.
 However these web-facing GSEA implementations generally require a server-hosted back end.
 Further, there are no web-based MGSA implementations.
 
-
 \section*{Results}
 
 We sample from a collapsed version of the model by integrating out the probability parameters.
@@ -105,7 +104,7 @@ using the beta function
 B(x,y) = \int_0^1 t^{x-1}(1-t)^{y-1} dt = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
 \]
 Integrating out probability parameters improves sampling efficiency
-and allows for future model variations where, for example, each gene has its own false positive parameter $\beta_i$.
+and allows for future model variations where, for example, we observe multiple gene sets and give each gene its own false positive parameter $\beta_i$.
 Our implementation by default uses uninformative priors with hyperparameters ${\bf a}={\bf b}={\bf p}=(1,1)$
 but this can be overridden by the user.
 
@@ -118,6 +117,9 @@ The relative rates of these moves can be set by the user;
 after some empirical investigation of mixing efficiency, we set the defaults such that
 {\em flip}, {\em step}, and {\em jump} are equiprobable,
 while {\em randomize} is disabled.
+
+The non-model based GSEA implementation uses a standard one-tailed Fisher's Exact Test with a Bonferroni correction
+for multiple hypothesis testing.
 
 We present JavaScript implementation of MGSA and GSEA, allowing easy comparison.
 Static site: can be hosted as static files, inexpensively and with considerable security benefits
