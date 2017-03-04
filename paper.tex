@@ -104,7 +104,9 @@ using the beta function
 B(x,y) = \int_0^1 t^{x-1}(1-t)^{y-1} dt = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
 \]
 Integrating out probability parameters improves sampling efficiency
-and allows for future model variations where, for example, we observe multiple gene sets and give each gene its own false positive parameter $\beta_i$.
+and allows for higher-dimensional models where, for example, we observe multiple gene sets
+and give each term its own probability $\pi_j$
+or each gene its own error rates $(\alpha_i, \beta_i)$.
 Our implementation by default uses uninformative priors with hyperparameters ${\bf a}={\bf b}={\bf p}=(1,1)$
 but this can be overridden by the user.
 
