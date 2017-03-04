@@ -129,6 +129,10 @@ Static site: can be hosted as static files, inexpensively and with considerable 
 For reference we also provide C++ implementation that should yield numerically identical results
 (MCMC uses same random number generator)
 
+The MCMC sampler of \cite{pmid20172960} implemented only the {\em flip} move.
+To test the efficacy of our newly-introduced moves we measured the autocorrelation of the log-likelihood
+and of the term variables for a test set of 17 {\em S.cerevisiae} mating genes supplied by the GO project.
+
 Autocorrelation plots
 
 Speed comparison: C++ vs JavaScript
