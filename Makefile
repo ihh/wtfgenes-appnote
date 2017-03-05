@@ -34,11 +34,15 @@ wtfgenes:
 $(YEAST)/$(GO) $(YEAST)/$(ASSOCS): wtfgenes
 	cd $(YEAST); make $(GO) $(ASSOCS)
 
-# The following rules use biomake's multi-wildcard pattern-matching
+# The next two rules use biomake's multi-wildcard pattern-matching
 # https://github.com/evoldoers/biomake
 mixing.f$F-s$S-j$J-r$R.json: $(YEAST)/$(GO) $(YEAST)/$(ASSOCS)
 	$(WTFGENES) -F $F -S $S -J $J -R $R -o $(YEAST)/$(GO) -a $(YEAST)/$(ASSOCS) -g $(YEAST)/$(MATING) -l mixing >$@
 
 $(AUTO).$(PARAMS).csv: mixing.$(PARAMS).json
-	node -e 'var fs = require ("fs"), json = JSON.parse (fs.readFileSync ("$<")), auto = json.mcmc.$(AUTO); if (auto[0]) auto = auto[0]; console.log ("r,$(AUTO)"); Object.keys(auto).forEach (function (r) { console.log (r + "," + auto[r]) })' >$@
+	node -e 'var fs = require ("fs"), json = JSON.parse (fs.readFileSync ("$<")), auto = json.mcmc.$(AUTO); if (auto[0]) auto = auto[0]; console.log ("tau,$(AUTO)"); Object.keys(auto).forEach (function (tau) { console.log (tau + "," + auto[tau]) })' >$@
+
+# R
+plot.pdf: logLikeAutoCorrelation.f1-s0-j0-r0.csv logLikeAutoCorrelation.f1-s1-j0-r0.csv
+	R -f makeplot.R
 
