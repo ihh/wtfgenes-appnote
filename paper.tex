@@ -47,7 +47,13 @@ but remains significantly less well-developed than GSEA.
 \includegraphics[width=\columnwidth]{model}
 \caption{
   \label{fig:model}
-  Model-based explanation of observed genes ($O_j$) using ontology terms ($T_i$), following \cite{pmid20172960}.
+  Model-based explanation of observed genes ($O_i$) using ontology terms ($T_j$), following \cite{pmid20172960}.
+  Other variables and hyperparameters are defined in the text.
+  Circular nodes indicate continuous-valued variables or hyperparameters;
+  square nodes indicate discrete-valued (boolean) variables.
+  Dashed lines indicate deterministic relationships;
+  shaded nodes indicate observations.
+  Plates (rounded rectangles) indicate replication.
 }
 \end{figure}
 
@@ -139,6 +145,7 @@ while {\em randomize} is disabled.
   \label{fig:termauto}
   Autocorrelation of term variables, as a function of the number of MCMC samples, for several MCMC kernels on a set of 17 {\em S.cerevisiae} mating genes.
   A rapidly-decaying curve indicates an efficiently-mixing kernel.
+  The kernel incorporating {\em flip}, {\em step} and {\em jump} moves (defined in the text) mixes most efficiently.
 }
 \end{figure}
 
