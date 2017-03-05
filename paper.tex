@@ -14,9 +14,7 @@ approaches, that can be published as a static
 site with computation run in JavaScript on the user's web browser client.
 Apart from hosting, zero server resources are required: the site can (for example) be served
 directly from an S3 bucket.
-A faster C++ implementation yielding identical results is also provided.
-Our implementation of model-based Gene Ontology enrichment uses some optimizations
-which permit probability parameters to be integrated out directly.
+A C++11 implementation yielding identical results runs roughly twice as fast as the JavaScript version.
 }{
 \wtfgenes\ is available from \url{https://github.com/evoldoers/wtfgenes}.
 }{
@@ -27,11 +25,12 @@ None.
 
 \section*{Introduction}
 
-Gene Set Enrichment Analysis (GSEA) \cite{pmid16199517}
-Numerous implementations e.g. GO::TermFinder \cite{pmid15297299}
+Gene Set Enrichment Analysis (GSEA) \citep{pmid16199517}
+Standard approach is a one-tailed Fisher's Exact Test (based on the hypergeometric distribution), with a correction for multiple hypothesis testing.
+Numerous implementations e.g. GO::TermFinder \citep{pmid15297299}
 
-Model-based Gene Set Analysis (MGSA) \cite{pmid20172960}
-Bioconductor \cite{pmid21561920}
+Model-based Gene Set Analysis (MGSA) \citep{pmid20172960}
+Bioconductor \citep{pmid21561920}
 
 builds on earlier generative model by \cite{pmid18676451}
 
@@ -41,7 +40,7 @@ builds on earlier generative model by \cite{pmid18676451}
 \includegraphics[width=\columnwidth]{model}
 \caption{
   \label{fig:model}
-  The model
+  Model-based explanation of observed genes ($O_j$) using ontology terms ($T_i$), following \cite{pmid20172960}.
 }
 \end{figure}
 
@@ -73,14 +72,14 @@ The model of \cite{pmid20172960} is similar but used an
 
 Most MGSA and GSEA implementations are designed for desktop use.
 
-Several GSEA implementations are designed for web use, notably Enrichr \cite{pmid23586463,pmid25971742,pmid27141961}
+Several GSEA implementations are designed for web use, notably Enrichr \citep{pmid23586463,pmid25971742,pmid27141961}
 which has a rich dynamic web front-end.
 However these web-facing GSEA implementations generally require a server-hosted back end.
 Further, there are no web-based MGSA implementations.
 
 \section*{Results}
 
-We sample from a collapsed version of the model by integrating out the probability parameters.
+We sample from a collapsed version of the MGSA model in Figure~\ref{fig:model} by integrating out the probability parameters.
 Let $c_p = \sum_j^m T_j$ count the number of activated terms,
 $c_g = \sum_i^n H_i$ the activated genes,
 $c_a = \sum_i^n O_i(1-H_i)$ the false positives and
@@ -110,38 +109,59 @@ or each gene its own error rates $(\alpha_i, \beta_i)$.
 Our implementation by default uses uninformative priors with hyperparameters ${\bf a}={\bf b}={\bf p}=(1,1)$
 but this can be overridden by the user.
 
-For MCMC we use a Metropolis-Hastings sampler where each proposed move perturbs some subset of the term variables.
+The MCMC sampler uses a Metropolis-Hastings kernel where each proposed move perturbs some subset of the term variables.
 These moves include {\em flip}, where a single term is toggled;
 {\em step}, where any activated term and any one of its unactivated ancestors or descendants are toggled;
 {\em jump}, where any activated term and any unactivated term are toggled; and
 {\em randomize}, where all term variables are uniformly randomized.
-The relative rates of these moves can be set by the user;
-after some empirical investigation of mixing efficiency, we set the defaults such that
-{\em flip}, {\em step}, and {\em jump} are equiprobable,
+The relative rates of these moves can be set by the user.
+
+The sampler of \cite{pmid20172960} implemented only the {\em flip} move.
+To test the relative efficacy of the newly-introduced moves we measured the autocorrelation of the term variables
+for one of the GO Project's test sets, containing 17 {\em S.cerevisiae} mating genes.
+\footnote{Gene IDs: STE2, STE3, STE5, GPA1, SST2, STE11, STE50, STE20, STE4, STE18, FUS3, KSS1, PTP2, MSG5, DIG1, DIG2, STE12.}
+The results, shown in Figure~\ref{fig:termauto}, led us to set the MCMC defaults such that
+the {\em flip}, {\em step}, and {\em jump} moves are equiprobable,
 while {\em randomize} is disabled.
 
-The non-model based GSEA implementation uses a standard one-tailed Fisher's Exact Test with a Bonferroni correction
-for multiple hypothesis testing.
+\begin{figure}
+\includegraphics[width=\columnwidth]{termAutoCorrelation}
+\caption{
+  \label{fig:termauto}
+  Autocorrelation of term variables, as a function of the number of MCMC samples, for several MCMC kernels on a set of 17 {\em S.cerevisiae} mating genes.
+  A rapidly-decaying curve indicates an efficiently-mixing kernel.
+}
+\end{figure}
 
-We present JavaScript implementation of MGSA and GSEA, allowing easy comparison.
-Static site: can be hosted as static files, inexpensively and with considerable security benefits
+We have implemented both GSEA (with Bonferroni correction) and MGSA (as described above), in both C++11 and JavaScript.
+The JavaScript version can be run as a command-line tool using node, or via a web interface in a browser, and includes extensive unit tests.
+The two implementations use the same random number generator and yield numerically identical results.
+The C++ version is about twice as fast:
+a benchmark of MGSA on a late-2014 iMac (4GHz Intel Core i7),
+using the abovementioned 17 yeast mating genes and the relevant subset of 518 GO terms, run for 1,000 samples per term,
+took 37.6 seconds of user time for the C++ implementation and 79.8 seconds in JavaScript.
+By contrast, the GSEA approach is almost instant,
+though less statistically powerful than MGSA if the observed gene set is indeed generated by a small number of terms \citep{pmid20172960}.
 
-For reference we also provide C++ implementation that should yield numerically identical results
-(MCMC uses same random number generator)
-
-The MCMC sampler of \cite{pmid20172960} implemented only the {\em flip} move.
-To test the efficacy of our newly-introduced moves we measured the autocorrelation of the log-likelihood
-and of the term variables for a test set of 17 {\em S.cerevisiae} mating genes supplied by the GO project.
-
-Autocorrelation plots
-
-Speed comparison: C++ vs JavaScript
+When run via a web browser, the JavaScript implementation can be deployed as a ``static site'',
+i.e. consisting only of static files (HTML, CSS, JSON, and JavaScript) that can be hosted via a minimal web server with no need for dynamic code execution.
+This has considerable advantages: static web hosting is generally much cheaper, and far more secure, than running server-hosted web applications.
 
 \section*{Discussion}
 
-Not a direct competitor to Enrichr, which has much richer visualizations and allows user submission of gene sets
+JavaScript genome browsers such as JBrowse \citep{pmid27072794}
+are consistent with a broader web trend of producing static sites where possible
 
-GREAT \cite{pmid20436461}
+Not a direct competitor to Enrichr, which has much richer visualizations and allows user submission of gene sets,
+consequently requiring a server back-end
+
+The model-based approach is versatile: it can readily be extended
+to applications that are structured
+temporally \citep{pmid26111374},
+spatially \citep{pmid26877824},
+by genomic region \citep{pmid20436461},
+or using domain-specific biological knowledge \citep{pmid24675718}.
+
 
 \section*{Funding}
 
