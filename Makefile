@@ -43,6 +43,6 @@ $(AUTO).$(PARAMS).csv: mixing.$(PARAMS).json
 	node -e 'var fs = require ("fs"), json = JSON.parse (fs.readFileSync ("$<")), auto = json.mcmc.$(AUTO); if (auto[0]) auto = auto[0]; console.log ("tau,$(AUTO)"); Object.keys(auto).forEach (function (tau) { console.log (tau + "," + auto[tau]) })' >$@
 
 # R
-plot.pdf: logLikeAutoCorrelation.f1-s0-j0-r0.csv logLikeAutoCorrelation.f1-s1-j0-r0.csv
+plot.pdf: makeplot.R logLikeAutoCorrelation.f1-s0-j0-r0.csv logLikeAutoCorrelation.f1-s1-j0-r0.csv
 	R -f makeplot.R
 
