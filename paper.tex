@@ -13,7 +13,7 @@ We develop a collapsed likelihood for model-based gene set analysis and present 
 approaches, that can be published as a static
 site with computation run in JavaScript on the user's web browser client.
 Apart from hosting, zero server resources are required: the site can (for example) be served
-directly from an S3 bucket.
+directly from an Amazon S3 bucket.
 A C++11 implementation yielding identical results runs roughly twice as fast as the JavaScript version.
 }{
 \wtfgenes\ is available from \url{https://github.com/evoldoers/wtfgenes} under the BSD3 license.
@@ -32,7 +32,7 @@ which models the number of term-associations if the gene set was chosen by chanc
 with a suitable correction for multiple hypothesis testing.
 The GSEA has been implemented many times on various platforms \citep{pmid12431279,pmid11829497,pmid12702209,pmid15297299,pmid18511468,pmid22543366,pmid23586463}.
 
-An alternative to GSEA, which more directly addresses some of the multiple testing issues
+A Bayesian alternative to GSEA, which more directly addresses some of the multiple testing issues
 (for example, by modeling the ways that an observed gene list can be broken down into complementary gene sets),
 is Model-based Gene Set Analysis (MGSA).
 In contrast to GSEA, which just rejects a null hypothesis that genes are chosen by chance,
