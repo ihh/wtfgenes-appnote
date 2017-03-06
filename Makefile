@@ -19,7 +19,7 @@ clean:
 .SECONDARY:
 
 
-# Analysis
+# Analysis of mixing properties of different kernels on 17-gene yeast dataset
 WTFURL = https://github.com/evoldoers/wtfgenes.git
 WTFGENES = ./wtfgenes/bin/wtfgenes.js
 
@@ -54,3 +54,9 @@ makeplot.R:
 logLikeAutoCorrelation.pdf termAutoCorrelation.pdf: makeplot.R $(CSV)
 	R -f makeplot.R
 
+# Simulation on yeast dataset
+sim.t$(TERMS).json:
+	$(WTFGENES) -o $(YEAST)/$(GO) -a $(YEAST)/$(ASSOCS) -A $(TERMS) -O .001 -E .01 -B 100 -x -X -w 100 -s 100 >$@
+
+allsim.t$(MAXTERMS).csv: $(addprefix sim.t,$(addsuffix .json,$(iota $(MAXTERMS))))
+	node -e 'fs=require("fs");console.log("method,terms,threshold,recall,specificity,precision,fpr,precision_n\n");for(nTerms=0;nTerms<$(MAXTERMS);++nTerms){d=JSON.parse(fs.readFileSync("sim.t"+nTerms+".json"));["hypergeometric","model"].map(function(method){d.analysis[method].forEach(function(row){console.log([method,nTerms,row.threshold,row.recall.mean,row.specificity.mean,row.precision.mean,row.fpr.mean,row.precision.n].join(","))})})}' >$@
