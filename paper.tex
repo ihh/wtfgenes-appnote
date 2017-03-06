@@ -12,7 +12,7 @@ These approaches must typically be run using downloaded software, or on a server
 We develop a collapsed likelihood for model-based gene set analysis and present \wtfgenes, an implementation of both hypergeometric and model-based
 approaches, that can be published as a static
 site with computation run in JavaScript on the user's web browser client.
-Apart from hosting, zero server resources are required: the site can (for example) be served
+Apart from hosting files, zero server resources are required: the site can (for example) be served
 directly from an Amazon S3 bucket.
 A C++11 implementation yielding identical results runs roughly twice as fast as the JavaScript version.
 }{
@@ -55,7 +55,7 @@ but remains significantly less well-developed than Frequentist TEA.
   square nodes indicate discrete-valued (boolean) variables.
   Dashed lines indicate deterministic relationships;
   shaded nodes indicate observations.
-  Plates (rounded rectangles) indicate replication.
+  Plates (rounded rectangles) indicate replicated subgraph structures.
 }
 \end{figure}
 
@@ -111,13 +111,12 @@ Z(c_b;c_g,{\bf b})
 where
 \[
 Z(k;N,{\bf A}) =
-\left( \begin{array}{c} N \\ k \end{array} \right)
-\frac{B(k+A_0,N-k+A_1)}{B(A_0,A_1)}
+\frac{B(N-k+A_0,k+A_1)}{B(A_0,A_1)}
 \]
-is the beta-binomial distribution for $k$ successes in $N$ trials with pseudocounts ${\bf A}=(A_0,A_1)$,
+is the beta-Bernoulli distribution for $k$ ordered successes in $N$ trials with hyperparameters ${\bf A}=(A_0,A_1)$,
 using the beta function
 \[
-B(x,y) = \int_0^1 t^{x-1}(1-t)^{y-1} dt = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
+B(x,y) = \int_0^1 t^{x-1} (1-t)^{y-1} dt = \frac{\Gamma(x)\Gamma(y)}{\Gamma(x+y)}
 \]
 Integrating out probability parameters improves sampling efficiency
 and allows for higher-dimensional models where, for example, we observe multiple gene sets
