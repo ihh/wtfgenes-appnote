@@ -1,0 +1,8 @@
+require("ggplot2")
+data=read.csv("allsim.t4.csv")
+data$Terms <- cut (data$terms, breaks=c(-Inf,1.5,2.5,3.5,Inf), labels=c("1","2","3","4"))
+data$Method[data$method == "model"] = "Bayesian"
+data$Method[data$method == "hypergeometric"] = "Frequentist"
+data$fpr <- 1 - data$specificity
+ggplot(aes(x = fpr, y = recall, color = Method, shape = Terms, group = interaction(Method,Terms)), data = data) + geom_point() + scale_colour_grey() + xlab("Specificity") + ylab("Recall")
+ggsave("allsim.pdf")
