@@ -1,2 +1,2 @@
-# biomake-appnote
-Applications Note for Biomake
+# wtfgenes-appnote
+Applications Note for wtfgenes
