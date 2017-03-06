@@ -126,8 +126,9 @@ or each gene its own error rates $(\alpha_i, \beta_i)$.
 Our implementation by default uses uninformative priors with hyperparameters ${\bf a}={\bf b}={\bf p}=(1,1)$
 but this can be overridden by the user.
 
-The MCMC sampler uses a Metropolis-Hastings kernel where each proposed move perturbs some subset of the term variables.
-These moves include {\em flip}, where a single term is toggled;
+The MCMC sampler uses a Metropolis-Hastings kernel \citep{GilksEtal96}.
+Each proposed move perturbs some subset of the term variables.
+The moves include {\em flip}, where a single term is toggled;
 {\em step}, where any activated term and any one of its unactivated ancestors or descendants are toggled;
 {\em jump}, where any activated term and any unactivated term are toggled; and
 {\em randomize}, where all term variables are uniformly randomized.
@@ -135,8 +136,8 @@ The relative rates of these moves can be set by the user.
 
 The sampler of \cite{pmid20172960} implemented only the {\em flip} move.
 To test the relative efficacy of the newly-introduced moves we measured the autocorrelation of the term variables
-for one of the GO Project's test sets, containing 17 {\em S.cerevisiae} mating genes.
-\footnote{Gene IDs: STE2, STE3, STE5, GPA1, SST2, STE11, STE50, STE20, STE4, STE18, FUS3, KSS1, PTP2, MSG5, DIG1, DIG2, STE12.}
+for one of the GO Project's test sets, containing 17 {\em S.cerevisiae}
+mating genes\footnote{Gene IDs: STE2, STE3, STE5, GPA1, SST2, STE11, STE50, STE20, STE4, STE18, FUS3, KSS1, PTP2, MSG5, DIG1, DIG2, STE12.}.
 The results, shown in Figure~\ref{fig:termauto}, led us to set the MCMC defaults such that
 the {\em flip}, {\em step}, and {\em jump} moves are equiprobable,
 while {\em randomize} is disabled.
