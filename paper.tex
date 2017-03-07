@@ -13,7 +13,7 @@ We develop a collapsed likelihood for model-based gene set analysis and present 
 approaches, that can be published as a static
 site with computation run in JavaScript on the user's web browser client.
 Apart from hosting files, zero server resources are required: the site can (for example) be served
-directly from an Amazon S3 bucket.
+directly from Amazon S3 or GitHub Pages.
 A C++11 implementation yielding identical results runs roughly twice as fast as the JavaScript version.
 }{
 \wtfgenes\ is available from \url{https://github.com/evoldoers/wtfgenes} under the BSD3 license.
@@ -33,7 +33,7 @@ which we refer to as {\em Frequentist TEA},
 is a one-tailed Fisher's Exact Test (based on the hypergeometric distribution,
 which models the number of term-associations if the gene set was chosen by chance),
 with a suitable correction for multiple hypothesis testing.
-Frequentist TEA has been implemented many times on various platforms \citep{pmid12431279,pmid11829497,pmid12702209,pmid15297299,pmid18511468,pmid22543366,pmid23586463}.
+Frequentist TEA has been implemented many times on various platforms \citep{pmid12431279,pmid11829497,pmid12702209,pmid15297299,pmid18511468,pmid22543366,pmid23868073,pmid23586463}.
 
 A model-based alternative to Frequentist TEA, which more directly addresses some of the multiple testing issues
 (for example, by modeling the ways that an observed gene list can be broken down into complementary gene sets),
@@ -178,8 +178,10 @@ The MCMC sampler was run for 100 iterations per term, and this experiment was re
 The model-based approach has vastly superior recall to the Fisher exact test, and the difference
 grows with the number of terms.
 
-Our JavaScript version of Bayesian TEA, when used as a web application, includes visual feedback on the log-likelihood during a sampling run.
-It includes setup scripts allowing it to be deployed as a ``static site'',
+Our JavaScript software, when used as a web application,
+offers a ``quick report'' view with instant feedback using Frequentist TEA.
+For the slower-running Bayesian TEA, the software plots the log-likelihood during an MCMC sampling run, for visual feedback.
+The repository includes setup scripts allowing the tool to be deployed as a ``static site'',
 i.e. consisting only of static files (HTML, CSS, JSON, and JavaScript) that can be hosted via a minimal web server with no need for dynamic code execution.
 This has considerable advantages: static web hosting is generally much cheaper, and far more secure, than running server-hosted web applications.
 
@@ -189,10 +191,10 @@ can be found at \url{https://evoldoers.github.io/wtfgo}.
 \section*{Discussion}
 
 JavaScript genome browsers such as JBrowse \citep{pmid27072794}
-represent a broader web trend of producing static sites where possible.
-We have implemented such a static site approach for ontological term enrichment analysis of gene sets that offers both Bayesian and frequentist approaches.
-In contrast with existing Frequentist TEA services such as DAVID-WS or Enrichr,
-it requires no server resources and allows comparison of Bayesian and Frequentist TEA approaches.
+represent a broader web trend of producing static sites where possible, for reasons of security and performance.
+We have implemented such a static site generator for ontological term enrichment analysis of gene sets that offers both Bayesian and frequentist tests.
+In contrast with existing web services for Frequentist TEA, such as DAVID-WS or Enrichr,
+it requires no server resources and allows comparison of Bayesian and Frequentist approaches.
 
 Model-based TEA is versatile: it can readily be extended
 to allow for datasets that are structured
