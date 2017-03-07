@@ -172,8 +172,9 @@ took 37.6 seconds of user time for the C++ implementation and 79.8 seconds in Ja
 By contrast, the Frequentist TEA approach is almost instant.
 However, its weaker statistical power is apparent from Figure~\ref{fig:simresults},
 which compares the recall {\em vs} specificity of Bayesian and Frequentist methods
-on simulated datasets. For values of $N$ from 1 to 4, we sampled $N$ terms from the yeast subset of the Gene Ontology
-were randomly sampled, and generated a corresponding gene set with false positive rate 0.1\% and false negative rate 1\%.
+on simulated datasets. For values of $N$ from 1 to 4, we sampled $N$ terms
+from the {\em S.cerevisiae} subset of the Gene Ontology,
+and generated a corresponding set of yeast genes with false positive rate 0.1\% and false negative rate 1\%.
 The MCMC sampler was run for 100 iterations per term, and this experiment was repeated 100 times.
 The model-based approach has vastly superior recall to the Fisher exact test, and the difference
 grows with the number of terms.
@@ -189,19 +190,19 @@ can be found at \url{https://evoldoers.github.io/wtfgo/}
 \section*{Discussion}
 
 JavaScript genome browsers such as JBrowse \citep{pmid27072794}
-are consistent with a broader web trend of producing static sites where possible.
+represent a broader web trend of producing static sites where possible.
 We have implemented such a static site approach for ontological term enrichment analysis of gene sets that offers both Bayesian and frequentist approaches.
-It is not intended as a direct competitor to existing Frequentist TEA services such as DAVID-WS or Enrichr,
-but rather as a lightweight static site-generator that allows comparison of Bayesian and Frequentist TEA approaches.
+In contrast with existing Frequentist TEA services such as DAVID-WS or Enrichr,
+it requires no server resources and allows comparison of Bayesian and Frequentist TEA approaches.
 
-Model-based Term Enrichment Analysis is versatile: it can readily be extended
+Model-based TEA is versatile: it can readily be extended
 to allow for datasets that are structured
 temporally \citep{pmid26111374},
 spatially \citep{pmid26877824},
 or by genomic region \citep{pmid20436461};
 to use domain-specific biological knowledge \citep{pmid24675718};
 or to incorporate additional lines of evidence such as quantitative data \citep{pmid21599902}.
-We hope our development of a collapsed likelihood for Bayesian TEA, and evaluation of different MCMC kernels, will assist these efforts.
+We hope our development of a collapsed likelihood, and evaluation of different MCMC kernels, will assist these efforts.
 
 Coincidentally, Fisher's Exact Test---which we call Frequentist TEA---was originally motivated by a blind tea-tasting challenge \citep{Fisher1935}.
 
