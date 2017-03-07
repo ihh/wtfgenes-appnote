@@ -40,11 +40,9 @@ A model-based alternative to Frequentist TEA, which more directly addresses some
 is {\em Bayesian TEA}.
 In contrast to Frequentist TEA, which just rejects a null hypothesis that genes are chosen by chance,
 the Bayesian TEA explicitly models the alternative hypothesis that the gene set was generated from a few random ontology terms.
-This approach was introduced by \cite{pmid18676451} and developed by \cite{pmid20172960},
-who demonstrated by simulation its increased statistical power
-when the observed gene set is indeed explained by a small number of complementary terms.
-It has been implemented in Java \citep{pmid20172960} and R \citep{pmid21561920},
-but remains significantly less well-developed than Frequentist TEA.
+This approach was introduced by \cite{pmid18676451} and further developed by \cite{pmid20172960},
+who implemented model-based testing in Java and R \citep{pmid21561920}.
+However, the model-based approach remains significantly less well-explored than frequentist approaches.
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{model}
@@ -166,7 +164,7 @@ took 37.6 seconds of user time for the C++ implementation and 79.8 seconds in Ja
   \label{fig:simresults}
   ROC curves for Frequentist and Bayesian TEA. The axes are scaled per term.
   There are 5,919 ontology terms annotated to {\em S.cerevisiae} genes, so (for example)
-  a false discovery rate of 0.001 corresponds to $\sim$6 falsely reported terms.
+  a false discovery rate of 0.001 corresponds to about 6 falsely reported terms.
 }
 \end{figure}
 
