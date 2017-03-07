@@ -4,7 +4,7 @@
 % Abstract
 \structabs{
 A common technique for interpreting experimentally-identified lists of genes
-is to look for enrichment of genes associated to particular Gene Ontology terms.
+is to look for enrichment of genes associated to particular ontology terms.
 The most common technique uses the hypergeometric distribution;
 more recently, a model-based approach was proposed.
 These approaches must typically be run using downloaded software, or on a server.
@@ -17,6 +17,7 @@ directly from an Amazon S3 bucket.
 A C++11 implementation yielding identical results runs roughly twice as fast as the JavaScript version.
 }{
 \wtfgenes\ is available from \url{https://github.com/evoldoers/wtfgenes} under the BSD3 license.
+A demonstration for the Gene Ontology is usable at \url{https://evoldoers.github.io/wtfgo}.
 }{
 Ian Holmes {\tt ihholmes+wtfgenes@gmail.com}.
 }{
@@ -185,7 +186,7 @@ i.e. consisting only of static files (HTML, CSS, JSON, and JavaScript) that can 
 This has considerable advantages: static web hosting is generally much cheaper, and far more secure, than running server-hosted web applications.
 
 An example wtfgenes static site, configured for the GO-basic ontology and GO-annotated genomes from the Gene Ontology website,
-can be found at \url{https://evoldoers.github.io/wtfgo/}
+can be found at \url{https://evoldoers.github.io/wtfgo}.
 
 \section*{Discussion}
 
