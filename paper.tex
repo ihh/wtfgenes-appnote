@@ -88,7 +88,7 @@ The model of \cite{pmid20172960} is similar but used an
 Most Bayesian and Frequentist TEA implementations are designed for desktop use.
 Several Frequentist TEA implementations are designed for the web, such as
 DAVID-WS \citep{pmid22543366} and
-Enrichr \citep{pmid23586463,pmid25971742,pmid27141961}
+Enrichr \citep{pmid23586463} % \citep{pmid23586463,pmid25971742,pmid27141961}
 which has a rich dynamic web front-end.
 However, web-facing Frequentist TEA implementations generally require a server-hosted back end that executes code.
 Further, there are no web-based Bayesian TEA implementations.
@@ -158,7 +158,25 @@ The C++ version is about twice as fast:
 a benchmark of Bayesian TEA on a late-2014 iMac (4GHz Intel Core i7),
 using the abovementioned 17 yeast mating genes and the relevant subset of 518 GO terms, run for 1,000 samples per term,
 took 37.6 seconds of user time for the C++ implementation and 79.8 seconds in JavaScript.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{allsim.pdf}
+\caption{
+  \label{fig:simresults}
+  ROC curves for Frequentist and Bayesian TEA. The axes are scaled per term.
+  There are 5,919 ontology terms annotated to {\em S.cerevisiae} genes, so (for example)
+  a false discovery rate of 0.001 corresponds to $\sim$6 falsely reported terms.
+}
+\end{figure}
+
 By contrast, the Frequentist TEA approach is almost instant.
+However, its weaker statistical power is apparent from Figure~\ref{fig:simresults},
+which compares the recall {\em vs} specificity of Bayesian and Frequentist methods
+on simulated datasets. For values of $N$ from 1 to 4, we sampled $N$ terms from the yeast subset of the Gene Ontology
+were randomly sampled, and generated a corresponding gene set with false positive rate 0.1\% and false negative rate 1\%.
+The MCMC sampler was run for 100 iterations per term, and this experiment was repeated 100 times.
+The model-based approach has vastly superior recall to the Fisher exact test, and the difference
+grows with the number of terms.
 
 Our JavaScript version of Bayesian TEA, when used as a web application, includes visual feedback on the log-likelihood during a sampling run.
 It can be deployed as a ``static site'',
@@ -185,7 +203,7 @@ to use domain-specific biological knowledge \citep{pmid24675718};
 or to incorporate additional lines of evidence such as quantitative data \citep{pmid21599902}.
 We hope our development of a collapsed likelihood for Bayesian TEA, and evaluation of different MCMC kernels, will assist these efforts.
 
-Coincidentally, Fisher's Exact Test---which we have called Frequentist TEA---was originally motivated by a blind tea-tasting challenge \citep{Fisher1935}.
+Coincidentally, Fisher's Exact Test---which we call Frequentist TEA---was originally motivated by a blind tea-tasting challenge \citep{Fisher1935}.
 
 \section*{Funding}
 
