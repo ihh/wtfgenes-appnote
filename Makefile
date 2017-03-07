@@ -61,5 +61,5 @@ sim.t$(TERMS).json:
 allsim.t$(MAXTERMS).csv: $(addprefix sim.t,$(addsuffix .json,$(iota $(MAXTERMS))))
 	node -e 'fs=require("fs");console.log("method,terms,threshold,recall,specificity,precision,fpr,precision_n");for(nTerms=1;nTerms<=$(MAXTERMS);++nTerms){d=JSON.parse(fs.readFileSync("sim.t"+nTerms+".json"));["hypergeometric","model"].map(function(method){d.analysis[method].forEach(function(row){console.log([method,nTerms,row.threshold,row.recall.mean,row.specificity.mean,row.precision.mean,row.fpr.mean,row.precision.n].join(","))})})}' >$@
 
-allsim.pdf: allsim.t4.csv allsim.R
-	R -f allsim.R
+allsim%pdf: allsim.t4.csv allsim%R
+	R -f allsim$*R
