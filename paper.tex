@@ -150,14 +150,6 @@ while {\em randomize} is disabled.
 }
 \end{figure}
 
-We have implemented both Frequentist TEA (with Bonferroni correction) and Bayesian TEA (as described above), in both C++11 and JavaScript.
-The JavaScript version can be run as a command-line tool using node, or via a web interface in a browser, and includes extensive unit tests.
-The two implementations use the same random number generator and yield numerically identical results.
-The C++ version is about twice as fast:
-a benchmark of Bayesian TEA on a late-2014 iMac (4GHz Intel Core i7),
-using the abovementioned 17 yeast mating genes and the relevant subset of 518 GO terms, run for 1,000 samples per term,
-took 37.6 seconds of user time for the C++ implementation and 79.8 seconds in JavaScript.
-
 \begin{figure}
 \includegraphics[width=\columnwidth]{allsim.pdf}
 \caption{
@@ -167,6 +159,14 @@ took 37.6 seconds of user time for the C++ implementation and 79.8 seconds in Ja
   a false discovery rate of 0.001 corresponds to about 6 falsely reported terms.
 }
 \end{figure}
+
+We have implemented both Frequentist TEA (with Bonferroni correction) and Bayesian TEA (as described above), in both C++11 and JavaScript.
+The JavaScript version can be run as a command-line tool using node, or via a web interface in a browser, and includes extensive unit tests.
+The two implementations use the same random number generator and yield numerically identical results.
+The C++ version is about twice as fast:
+a benchmark of Bayesian TEA on a late-2014 iMac (4GHz Intel Core i7),
+using the abovementioned 17 yeast mating genes and the relevant subset of 518 GO terms, run for 1,000 samples per term,
+took 37.6 seconds of user time for the C++ implementation and 79.8 seconds in JavaScript.
 
 By contrast, the Frequentist TEA approach is almost instant.
 However, its weaker statistical power is apparent from Figure~\ref{fig:simresults},
@@ -179,7 +179,7 @@ The model-based approach has vastly superior recall to the Fisher exact test, an
 grows with the number of terms.
 
 Our JavaScript version of Bayesian TEA, when used as a web application, includes visual feedback on the log-likelihood during a sampling run.
-It can be deployed as a ``static site'',
+It includes setup scripts allowing it to be deployed as a ``static site'',
 i.e. consisting only of static files (HTML, CSS, JSON, and JavaScript) that can be hosted via a minimal web server with no need for dynamic code execution.
 This has considerable advantages: static web hosting is generally much cheaper, and far more secure, than running server-hosted web applications.
 
