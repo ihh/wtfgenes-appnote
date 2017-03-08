@@ -28,13 +28,11 @@
 \maketitle
 }
 
-\title[WTFgenes]{WTFgenes: What's The Function of these genes? Static sites for model-based gene set analysis}
-\author[Christopher J. Mungall and Ian H. Holmes]{Christopher J. Mungall$^{\text{\sfb 1}}$ and Ian H. Holmes$^{\text{\sfb 2,3}}$}
-\address{
-  $^{\text{\sf 1}}$Environmental Genomics and Systems Biology Division, Lawrence Berkeley National Laboratory, 1 Cyclotron Rd, Berkeley, CA 94720, USA. \\
-  $^{\text{\sf 2}}$Department of Bioengineering, University of California, Berkeley, CA 94720, USA. \\
-  $^{\text{\sf 3}}$Molecular Biophysics and Integrated Bioimaging Division, Lawrence Berkeley National Laboratory, 1 Cyclotron Rd, Berkeley, CA 94720, USA.
-}
+\input{defs.tex}
+
+\title[\shorttitle]{\longtitle}
+\author[\shortauthors]{\longauthors}
+\address{ \authorsaddress }
 
 %\corresp{$^\ast$To whom correspondence should be addressed.}
 \corresp{}
@@ -43,6 +41,29 @@
 
 \editor{}
 
-\input{paper.tex}
+\input{abstract.tex}
+
+\section*{Introduction}
+\input{intro.tex}
+
+\section*{Results}
+In the Supplementary Information, we describe two refinements to model-based TEA:
+(i) a collapsed version of Figure~\ref{fig:model} with $\alpha$, $\beta$ and $\pi$ integrated out;
+(ii) additional MCMC sampling moves, which improve mixing.
+
+Our software, \wtfgenes, includes JavaScript and C++11 implementations of Bayesian and Frequentist TEA.
+As reported in the SI, the C++ version is about twice as fast.
+We also report simulations suggesting Bayesian TEA has greater statistical power than Frequentist TEA, particularly for gene sets explained by multiple terms.
+
+\input{results.tex}
+
+\section*{Discussion}
+\input{discussion.tex}
+
+\section*{Funding}
+\input{funding.tex}
+
+\bibliographystyle{natbib}
+\bibliography{references}
 
 \end{document}

@@ -10,11 +10,11 @@ clean:
 %.open: %
 	open $<
 
-%.pdf: %.tex paper.tex references.bib
-	pdflatex $<
+%.pdf: $(wildcard *.tex) references.bib
+	pdflatex $*.tex
 	bibtex $*
-	pdflatex $<
-	pdflatex $<
+	pdflatex $*.tex
+	pdflatex $*.tex
 
 .SECONDARY:
 

@@ -1,0 +1,25 @@
+The graphical model underpinning Bayesian TEA is sketched in Figure~\ref{fig:model}.
+For each of the $m$ terms there
+is a boolean random variable
+$T_j$ (``term $j$ is activated'').
+For each of the $n$ genes there is a directly-observed boolean random variable
+$O_i$ (``gene $i$ is observed in the gene set''),
+and one deterministic boolean variable
+$H_i$ (``gene $i$ is activated'')
+defined by $H_i = 1 - \prod_{j \in G_i} (1 - T_j)$
+where $G_i$ is the set of terms associated with gene $i$
+(including directly annotated terms, as well as ancestral terms implied by transitive closure of the directly annotated terms).
+The probability parameters are $\pi$ (term activation), $\alpha$ (false positive) and $\beta$ (false negative),
+and the respective hyperparameters are ${\bf p}=(p_0,p_1)$, ${\bf a}=(a_0,a_1)$ and ${\bf b}=(b_0,b_1)$.
+The model is
+\begin{eqnarray*}
+P(T_j=1|\pi) & = & \pi \\
+P(O_i=1|H_i=0,\alpha) & = & \alpha \\
+P(O_i=1|H_i=1,\beta) & = & 1-\beta
+\end{eqnarray*}
+with
+$\pi \sim \mbox{Beta}({\bf p})$,
+$\alpha \sim \mbox{Beta}({\bf a})$ and
+$\beta \sim \mbox{Beta}({\bf b})$.
+The model of \cite{pmid20172960} is similar but used an
+{\em ad hoc} discretized prior for $\pi$, $\alpha$ and $\beta$.

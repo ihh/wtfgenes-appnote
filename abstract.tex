@@ -1,0 +1,23 @@
+
+% Abstract
+\structabs{
+A common technique for interpreting experimentally-identified lists of genes
+is to look for enrichment of genes associated with particular ontology terms.
+The most common test uses the hypergeometric distribution;
+more recently, a model-based test was proposed.
+These approaches must typically be run using downloaded software, or on a server.
+}{
+We develop a collapsed likelihood for model-based gene set analysis and present \wtfgenes, an implementation of both hypergeometric and model-based
+approaches, that can be published as a static
+site with computation run in JavaScript on the user's web browser client.
+Apart from hosting files, zero server resources are required: the site can (for example) be served
+directly from Amazon S3 or GitHub Pages.
+A C++11 implementation yielding identical results runs roughly twice as fast as the JavaScript version.
+}{
+\wtfgenes\ is available from \url{https://github.com/evoldoers/wtfgenes} under the BSD3 license.
+A demonstration for the Gene Ontology is usable at \url{https://evoldoers.github.io/wtfgo}.
+}{
+Ian Holmes {\tt ihholmes+wtfgenes@gmail.com}.
+}{
+None.
+}
