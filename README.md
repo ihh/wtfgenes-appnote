@@ -1,2 +1,5 @@
+[![DOI](https://zenodo.org/badge/83849682.svg)](https://zenodo.org/badge/latestdoi/83849682)
+
 # wtfgenes-appnote
-Applications Note for [wtfgenes](https://github.com/evoldoers/wtfgenes)
+
+Paper describing [wtfgenes](https://github.com/evoldoers/wtfgenes) and evaluative simulation study.
