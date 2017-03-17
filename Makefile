@@ -1,8 +1,6 @@
 # Paper
 
-all: main.pdf.open
-
-preprint: preprint.pdf.open
+all preprint: preprint.pdf.open
 
 clean:
 	rm *.toc *.log *.blg *.out *.pdf *.aux *.nav *.vrb *.snm *~
